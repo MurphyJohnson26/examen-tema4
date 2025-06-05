@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aplicación Web VR - Examen Tema 4</title>
     
-    <!-- Solo A-Frame básico -->
+    <!-- Solo A-Frame básico - SIN EXTRAS -->
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     
     <style>
@@ -31,203 +31,269 @@
 <body>
     <!-- Instrucciones -->
     <div id="instructions">
-        <h3>🥽 Instrucciones Básicas</h3>
+        <h3>🥽 VR Aplicación Funcionando</h3>
         <p><strong>PC:</strong> WASD para moverte, mouse para mirar</p>
         <p><strong>VR:</strong> Haz click en los objetos para eliminarlos</p>
-        <p>✨ 16 objetos dispersos por todo el espacio</p>
+        <p>✨ 16 objetos dispersos girando</p>
     </div>
 
-    <!-- Escena A-Frame ULTRA SIMPLIFICADA -->
+    <!-- Escena A-Frame LIMPIA -->
     <a-scene 
         vr-mode-ui="enabled: true" 
-        renderer="antialias: true; colorManagement: true; physicallyCorrectLights: true"
         background="color: #87CEEB">
         
         <!-- Iluminación básica -->
         <a-light type="ambient" color="#BBB" intensity="0.8"></a-light>
         <a-light type="directional" position="0 1 1" color="#FFF" intensity="0.5"></a-light>
 
-        <!-- Suelo -->
+        <!-- Entorno básico -->
         <a-plane 
             position="0 0 0" 
             rotation="-90 0 0" 
-            width="30" 
-            height="30"
+            width="40" 
+            height="40"
             color="#8BC34A">
         </a-plane>
 
-        <!-- 16 OBJETOS MUY DISPERSOS -->
+        <!-- Paredes -->
+        <a-plane position="0 5 -20" width="40" height="10" color="#E0E0E0"></a-plane>
+        <a-plane position="-20 5 0" rotation="0 90 0" width="40" height="10" color="#E0E0E0"></a-plane>
+        <a-plane position="20 5 0" rotation="0 -90 0" width="40" height="10" color="#E0E0E0"></a-plane>
+
+        <!-- 16 OBJETOS MUY DISPERSOS CON ROTACIÓN -->
         
-        <!-- 1 -->
+        <!-- Esquina frontal izquierda -->
         <a-box 
-            position="-10 1 -10" 
+            id="obj1"
+            position="-15 1 15" 
             width="1" height="1" depth="1"
             color="#F44336"
+            animation="property: rotation; to: 360 360 360; loop: true; dur: 8000"
             class="clickable">
         </a-box>
 
-        <!-- 2 -->
+        <!-- Esquina frontal derecha -->
         <a-sphere 
-            position="10 1 -10" 
+            id="obj2"
+            position="15 1 15" 
             radius="0.5"
             color="#2196F3"
+            animation="property: rotation; to: 0 360 180; loop: true; dur: 6000"
             class="clickable">
         </a-sphere>
 
-        <!-- 3 -->
+        <!-- Esquina trasera izquierda -->
         <a-cylinder 
-            position="-10 1 10" 
+            id="obj3"
+            position="-15 1 -15" 
             radius="0.5" 
             height="1"
             color="#4CAF50"
+            animation="property: rotation; to: 180 360 0; loop: true; dur: 7000"
             class="clickable">
         </a-cylinder>
 
-        <!-- 4 -->
+        <!-- Esquina trasera derecha -->
         <a-cone 
-            position="10 1 10" 
+            id="obj4"
+            position="15 1 -15" 
             radius-bottom="0.5" 
             height="1"
             color="#FF9800"
+            animation="property: rotation; to: 360 0 360; loop: true; dur: 5000"
             class="clickable">
         </a-cone>
 
-        <!-- 5 -->
+        <!-- Centro alto -->
         <a-torus 
-            position="0 3 0" 
+            id="obj5"
+            position="0 4 0" 
             radius="0.5" 
             radius-tubular="0.1"
             color="#9C27B0"
+            animation="property: rotation; to: 180 180 360; loop: true; dur: 9000"
             class="clickable">
         </a-torus>
 
-        <!-- 6 -->
+        <!-- Lado izquierdo medio -->
         <a-box 
-            position="-5 1 -5" 
+            id="obj6"
+            position="-12 2 0" 
             width="1" height="1" depth="1"
             color="#E91E63"
+            animation="property: rotation; to: 270 360 90; loop: true; dur: 4000"
             class="clickable">
         </a-box>
 
-        <!-- 7 -->
+        <!-- Lado derecho medio -->
         <a-sphere 
-            position="5 1 -5" 
+            id="obj7"
+            position="12 2 0" 
             radius="0.5"
             color="#00BCD4"
+            animation="property: rotation; to: 360 270 180; loop: true; dur: 7500"
             class="clickable">
         </a-sphere>
 
-        <!-- 8 -->
+        <!-- Centro frontal -->
         <a-cylinder 
-            position="-5 1 5" 
+            id="obj8"
+            position="0 1 12" 
             radius="0.5" 
             height="1"
             color="#FFEB3B"
+            animation="property: rotation; to: 90 360 270; loop: true; dur: 6500"
             class="clickable">
         </a-cylinder>
 
-        <!-- 9 -->
+        <!-- Centro trasero -->
         <a-cone 
-            position="5 1 5" 
+            id="obj9"
+            position="0 1 -12" 
             radius-bottom="0.5" 
             height="1"
             color="#795548"
+            animation="property: rotation; to: 360 90 360; loop: true; dur: 5500"
             class="clickable">
         </a-cone>
 
-        <!-- 10 -->
+        <!-- Medio izquierdo frontal -->
         <a-box 
-            position="-8 2 0" 
+            id="obj10"
+            position="-8 3 8" 
             width="1" height="1" depth="1"
             color="#607D8B"
+            animation="property: rotation; to: 180 360 270; loop: true; dur: 8500"
             class="clickable">
         </a-box>
 
-        <!-- 11 -->
+        <!-- Medio derecho frontal -->
         <a-sphere 
-            position="8 2 0" 
+            id="obj11"
+            position="8 3 8" 
             radius="0.5"
             color="#FF5722"
+            animation="property: rotation; to: 360 180 90; loop: true; dur: 4500"
             class="clickable">
         </a-sphere>
 
-        <!-- 12 -->
+        <!-- Medio izquierdo trasero -->
         <a-cylinder 
-            position="0 2 -8" 
+            id="obj12"
+            position="-8 2 -8" 
             radius="0.5" 
             height="1"
             color="#CDDC39"
+            animation="property: rotation; to: 270 180 360; loop: true; dur: 7200"
             class="clickable">
         </a-cylinder>
 
-        <!-- 13 -->
+        <!-- Medio derecho trasero -->
         <a-cone 
-            position="0 2 8" 
+            id="obj13"
+            position="8 2 -8" 
             radius-bottom="0.5" 
             height="1"
             color="#009688"
+            animation="property: rotation; to: 360 270 0; loop: true; dur: 6200"
             class="clickable">
         </a-cone>
 
-        <!-- 14 -->
+        <!-- Alto izquierda -->
         <a-box 
-            position="-3 3 -3" 
+            id="obj14"
+            position="-5 4 -5" 
             width="1" height="1" depth="1"
             color="#673AB7"
+            animation="property: rotation; to: 90 270 360; loop: true; dur: 5800"
             class="clickable">
         </a-box>
 
-        <!-- 15 -->
+        <!-- Alto derecha -->
         <a-sphere 
-            position="3 3 -3" 
+            id="obj15"
+            position="5 4 -5" 
             radius="0.5"
             color="#FFC107"
+            animation="property: rotation; to: 360 90 270; loop: true; dur: 6800"
             class="clickable">
         </a-sphere>
 
-        <!-- 16 -->
+        <!-- Centro medio -->
         <a-cylinder 
-            position="0 3 3" 
+            id="obj16"
+            position="0 2 5" 
             radius="0.5" 
             height="1"
             color="#03A9F4"
+            animation="property: rotation; to: 180 360 180; loop: true; dur: 7800"
             class="clickable">
         </a-cylinder>
 
-        <!-- Cámara simple -->
-        <a-entity position="0 1.6 0">
-            <a-camera>
-                <a-cursor color="white"></a-cursor>
+        <!-- Cámara con controles básicos -->
+        <a-entity id="rig" position="0 1.6 0">
+            <a-camera 
+                look-controls="pointerLockEnabled: true"
+                wasd-controls="acceleration: 20">
+                <a-cursor 
+                    color="white"
+                    raycaster="objects: .clickable">
+                </a-cursor>
             </a-camera>
         </a-entity>
     </a-scene>
 
     <script>
-        // Script ultra simplificado
+        // Script ultra limpio sin errores
+        console.log('🥽 Aplicación VR iniciada - Versión limpia');
+        
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Aplicación VR básica iniciada');
+            console.log('DOM cargado');
             
-            // Hacer que los objetos giren
+            // Obtener todos los objetos clickeables
             const clickables = document.querySelectorAll('.clickable');
-            clickables.forEach(function(el) {
-                // Rotación aleatoria
-                const x = Math.random() * 360;
-                const y = Math.random() * 360;
-                const z = Math.random() * 360;
-                el.setAttribute('animation', {
-                    property: 'rotation',
-                    to: `${x} ${y} ${z}`,
-                    dur: 5000 + Math.random() * 5000,
-                    loop: true,
-                    easing: 'linear'
+            console.log(`📦 ${clickables.length} objetos encontrados`);
+            
+            // Configurar eventos de click
+            clickables.forEach(function(obj) {
+                obj.addEventListener('click', function() {
+                    console.log(`🎯 Eliminando objeto: ${this.id}`);
+                    
+                    // Crear efecto simple antes de eliminar
+                    this.setAttribute('animation__disappear', {
+                        property: 'scale',
+                        to: '0.1 0.1 0.1',
+                        dur: 500
+                    });
+                    
+                    // Eliminar después de la animación
+                    setTimeout(() => {
+                        if (this.parentNode) {
+                            this.parentNode.removeChild(this);
+                            console.log(`✅ Objeto eliminado: ${this.id}`);
+                            
+                            // Verificar objetos restantes
+                            const remaining = document.querySelectorAll('.clickable').length;
+                            console.log(`🔢 Objetos restantes: ${remaining}`);
+                            
+                            if (remaining === 0) {
+                                console.log('🎉 ¡Todos los objetos eliminados!');
+                            }
+                        }
+                    }, 500);
                 });
                 
-                // Click para eliminar
-                el.addEventListener('click', function() {
-                    console.log('Objeto clickeado');
-                    this.parentNode.removeChild(this);
+                // Efecto hover simple
+                obj.addEventListener('mouseenter', function() {
+                    this.setAttribute('scale', '1.2 1.2 1.2');
+                });
+                
+                obj.addEventListener('mouseleave', function() {
+                    this.setAttribute('scale', '1 1 1');
                 });
             });
+            
+            console.log('✅ Aplicación VR configurada correctamente');
         });
     </script>
 </body>
