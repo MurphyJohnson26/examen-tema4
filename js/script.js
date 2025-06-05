@@ -339,3 +339,4 @@ window.vrApp = {
 
 console.log("🚀 Script VR simplificado cargado")
 console.log("💡 Haz click en los objetos para hacerlos desaparecer")
+
