@@ -72,11 +72,11 @@
     
     <!-- Instrucciones -->
     <div id="instructions">
-        <h3>🥽 Instrucciones VR</h3>
-        <p><strong>PC:</strong> Usa WASD para moverte, mouse para mirar</p>
+        <h3>🥽 Instrucciones VR Simplificadas</h3>
+        <p><strong>PC:</strong> WASD para moverte, mouse para mirar</p>
         <p><strong>VR:</strong> Usa tus manos para interactuar</p>
-        <p><strong>Click:</strong> Interactúa con los objetos</p>
-        <p>Los objetos cambian de color al tocarlos</p>
+        <p><strong>Interacción:</strong> Haz click en los objetos para hacerlos desaparecer</p>
+        <p>✨ Objetos distribuidos por todo el espacio</p>
     </div>
 
     <!-- Escena A-Frame -->
@@ -95,6 +95,7 @@
         <a-light type="ambient" color="#404040" intensity="0.6"></a-light>
         <a-light type="directional" position="5 10 5" color="#ffffff" intensity="0.8"></a-light>
         <a-light type="point" position="0 5 0" color="#ffaa00" intensity="0.4"></a-light>
+        <a-light type="spot" position="-3 6 -6" color="#ff6600" intensity="0.3" angle="45"></a-light>
 
         <!-- Modelo del baño (si existe) -->
         <a-entity 
@@ -109,57 +110,120 @@
         <a-entity id="bathroom-environment">
             <!-- Suelo del baño -->
             <a-plane 
+                id="floor"
                 position="0 0 -3" 
                 rotation="-90 0 0" 
-                width="8" 
-                height="8"
+                width="20" 
+                height="20"
                 material="color: #E6E6FA; roughness: 0.8"
                 shadow="receive: true">
             </a-plane>
             
             <!-- Paredes -->
-            <a-plane position="0 4 -7" width="8" height="8" material="color: #F0F8FF"></a-plane>
-            <a-plane position="-4 4 -3" rotation="0 90 0" width="8" height="8" material="color: #F0F8FF"></a-plane>
-            <a-plane position="4 4 -3" rotation="0 -90 0" width="8" height="8" material="color: #F0F8FF"></a-plane>
+            <a-plane 
+                id="wall-back"
+                position="0 4 -13" 
+                width="20" 
+                height="8" 
+                material="color: #F0F8FF">
+            </a-plane>
+            <a-plane 
+                id="wall-left"
+                position="-10 4 -3" 
+                rotation="0 90 0" 
+                width="20" 
+                height="8" 
+                material="color: #F0F8FF">
+            </a-plane>
+            <a-plane 
+                id="wall-right"
+                position="10 4 -3" 
+                rotation="0 -90 0" 
+                width="20" 
+                height="8" 
+                material="color: #F0F8FF">
+            </a-plane>
             
             <!-- Bañera básica -->
-            <a-box position="-2 0.5 -5" width="2" height="1" depth="4" material="color: #FFFFFF"></a-box>
+            <a-box 
+                id="bathtub"
+                position="-3 0.5 -7" 
+                width="2.5" 
+                height="1" 
+                depth="4" 
+                material="color: #FFFFFF; metalness: 0.3">
+            </a-box>
             
             <!-- Lavabo -->
-            <a-cylinder position="2 1 -5" radius="0.8" height="0.2" material="color: #FFFFFF"></a-cylinder>
-            <a-box position="2 0.5 -5" width="1.5" height="1" depth="0.8" material="color: #8B4513"></a-box>
+            <a-cylinder 
+                id="sink"
+                position="3 1 -7" 
+                radius="0.8" 
+                height="0.2" 
+                material="color: #FFFFFF; metalness: 0.4">
+            </a-cylinder>
+            <a-box 
+                id="sink-cabinet"
+                position="3 0.5 -7" 
+                width="1.8" 
+                height="1" 
+                depth="1" 
+                material="color: #8B4513">
+            </a-box>
             
             <!-- Inodoro -->
-            <a-cylinder position="0 0.4 -6" radius="0.4" height="0.8" material="color: #FFFFFF"></a-cylinder>
-            <a-box position="0 0.8 -6.3" width="0.6" height="0.4" depth="0.2" material="color: #FFFFFF"></a-box>
+            <a-cylinder 
+                id="toilet"
+                position="0 0.4 -8" 
+                radius="0.4" 
+                height="0.8" 
+                material="color: #FFFFFF; metalness: 0.2">
+            </a-cylinder>
+            <a-box 
+                id="toilet-tank"
+                position="0 0.8 -8.3" 
+                width="0.8" 
+                height="0.4" 
+                depth="0.3" 
+                material="color: #FFFFFF">
+            </a-box>
+
+            <!-- Espejo -->
+            <a-plane 
+                id="mirror"
+                position="3 2.5 -6.9" 
+                width="1.5" 
+                height="1.5" 
+                material="color: #C0C0C0; metalness: 1.0; roughness: 0.1">
+            </a-plane>
         </a-entity>
 
-        <!-- 16 Objetos 3D interactivos con rotación aleatoria -->
+        <!-- 16 Objetos 3D interactivos MUY DISPERSOS -->
         
-        <!-- 1. Cubo rojo -->
+        <!-- 1. Extremo frontal izquierdo -->
         <a-box 
             id="cube1"
-            position="2 1.5 -2" 
+            position="-9 1.5 5" 
             scale="0.5 0.5 0.5"
             material="color: #FF6B6B; metalness: 0.3"
             class="interactive-object"
             animation="property: rotation; to: 360 360 360; loop: true; dur: 8000">
         </a-box>
 
-        <!-- 2. Esfera azul -->
+        <!-- 2. Extremo frontal derecho -->
         <a-sphere 
             id="sphere1"
-            position="-2 2 -1" 
+            position="9 2 5" 
             radius="0.4"
             material="color: #4ECDC4; metalness: 0.5"
             class="interactive-object"
             animation="property: rotation; to: 180 360 270; loop: true; dur: 6000">
         </a-sphere>
 
-        <!-- 3. Cilindro verde -->
+        <!-- 3. Extremo izquierdo medio -->
         <a-cylinder 
             id="cylinder1"
-            position="1 1 -1" 
+            position="-9 1 -5" 
             radius="0.3" 
             height="1"
             material="color: #45B7D1; roughness: 0.4"
@@ -167,10 +231,10 @@
             animation="property: rotation; to: 270 180 360; loop: true; dur: 7000">
         </a-cylinder>
 
-        <!-- 4. Cono naranja -->
+        <!-- 4. Extremo derecho medio -->
         <a-cone 
             id="cone1"
-            position="-1 1.5 -4" 
+            position="9 1.5 -5" 
             radius-bottom="0.4" 
             height="0.8"
             material="color: #FF6347; metalness: 0.3"
@@ -178,10 +242,10 @@
             animation="property: rotation; to: 360 270 180; loop: true; dur: 5000">
         </a-cone>
 
-        <!-- 5. Torus púrpura -->
+        <!-- 5. Centro alto -->
         <a-torus 
             id="torus1"
-            position="3 2.5 -1" 
+            position="0 5 -3" 
             radius="0.4" 
             radius-tubular="0.1"
             material="color: #9ACD32; metalness: 0.6"
@@ -189,50 +253,50 @@
             animation="property: rotation; to: 180 360 90; loop: true; dur: 9000">
         </a-torus>
 
-        <!-- 6. Octaedro rosa -->
+        <!-- 6. Extremo trasero izquierdo -->
         <a-octahedron 
             id="octahedron1"
-            position="0 3 -2" 
+            position="-8 2.5 -12" 
             radius="0.4"
             material="color: #DDA0DD; metalness: 0.7"
             class="interactive-object"
             animation="property: rotation; to: 360 180 360; loop: true; dur: 4000">
         </a-octahedron>
 
-        <!-- 7. Dodecaedro magenta -->
+        <!-- 7. Extremo trasero derecho -->
         <a-dodecahedron 
             id="dodecahedron1"
-            position="-3 1.8 -3" 
+            position="8 1.8 -12" 
             radius="0.3"
             material="color: #FF69B4; roughness: 0.4"
             class="interactive-object"
             animation="property: rotation; to: 270 360 180; loop: true; dur: 6500">
         </a-dodecahedron>
 
-        <!-- 8. Icosaedro turquesa -->
+        <!-- 8. Cerca de la bañera izquierda -->
         <a-icosahedron 
             id="icosahedron1"
-            position="2.5 1 -4" 
+            position="-5 1.5 -7" 
             radius="0.35"
             material="color: #20B2AA; metalness: 0.8"
             class="interactive-object"
             animation="property: rotation; to: 360 90 270; loop: true; dur: 7500">
         </a-icosahedron>
 
-        <!-- 9. Tetraedro dorado -->
+        <!-- 9. Cerca del lavabo derecha -->
         <a-tetrahedron 
             id="tetrahedron1"
-            position="-2.5 2.5 -1" 
+            position="5 2.5 -7" 
             radius="0.4"
             material="color: #FFD700; metalness: 0.5"
             class="interactive-object"
             animation="property: rotation; to: 180 270 360; loop: true; dur: 5500">
         </a-tetrahedron>
 
-        <!-- 10. Plano inclinado -->
+        <!-- 10. Centro frontal -->
         <a-plane 
             id="plane1"
-            position="1.5 2 -2.5" 
+            position="0 2 5" 
             width="1" 
             height="1"
             material="color: #87CEEB; side: double"
@@ -241,10 +305,10 @@
             animation="property: rotation; to: 405 390 375; loop: true; dur: 8500">
         </a-plane>
 
-        <!-- 11. Anillo naranja -->
+        <!-- 11. Alto izquierda -->
         <a-ring 
             id="ring1"
-            position="0 1 -5" 
+            position="-6 4 -2" 
             radius-inner="0.2" 
             radius-outer="0.4"
             material="color: #FF4500; side: double; metalness: 0.7"
@@ -252,30 +316,30 @@
             animation="property: rotation; to: 360 180 270; loop: true; dur: 6000">
         </a-ring>
 
-        <!-- 12. Cubo wireframe -->
+        <!-- 12. Alto derecha -->
         <a-box 
             id="cube2"
-            position="-1.5 3 -4.5" 
+            position="6 4 -2" 
             scale="0.6 0.6 0.6"
             material="color: #00CED1; wireframe: true"
             class="interactive-object"
             animation="property: rotation; to: 270 360 90; loop: true; dur: 4500">
         </a-box>
 
-        <!-- 13. Esfera metálica -->
+        <!-- 13. Lado izquierdo frontal -->
         <a-sphere 
             id="sphere2"
-            position="3.5 1.5 -2.5" 
+            position="-7 1.5 2" 
             radius="0.35"
             material="color: #C0C0C0; metalness: 1.0; roughness: 0.1"
             class="interactive-object"
             animation="property: rotation; to: 360 270 180; loop: true; dur: 7000">
         </a-sphere>
 
-        <!-- 14. Cilindro transparente -->
+        <!-- 14. Lado derecho frontal -->
         <a-cylinder 
             id="cylinder2"
-            position="-3.5 1.2 -2" 
+            position="7 1.2 2" 
             radius="0.4" 
             height="0.8"
             material="color: #8A2BE2; transparent: true; opacity: 0.7"
@@ -283,10 +347,10 @@
             animation="property: rotation; to: 180 360 270; loop: true; dur: 5800">
         </a-cylinder>
 
-        <!-- 15. Cono invertido -->
+        <!-- 15. Centro bajo -->
         <a-cone 
             id="cone2"
-            position="0.5 0.5 -3.5" 
+            position="2 0.8 -4" 
             radius-bottom="0.3" 
             height="0.6"
             rotation="180 0 0"
@@ -295,10 +359,10 @@
             animation="property: rotation; to: 540 360 180; loop: true; dur: 6200">
         </a-cone>
 
-        <!-- 16. Torus knot -->
+        <!-- 16. Alto centro trasero -->
         <a-torus-knot 
             id="torusknot1"
-            position="2 3.5 -3.5" 
+            position="0 4.5 -10" 
             radius="0.3" 
             radius-tubular="0.05"
             material="color: #FF1493; metalness: 0.8"
@@ -306,8 +370,12 @@
             animation="property: rotation; to: 360 180 360; loop: true; dur: 9500">
         </a-torus-knot>
 
-        <!-- Cámara y controles -->
-        <a-entity id="rig" position="0 1.6 4">
+        <!-- Cámara y controles simplificados -->
+        <a-entity 
+            id="rig" 
+            position="0 1.6 4"
+            movement-controls="fly: false; constrainToNavMesh: false">
+            
             <a-camera 
                 id="camera"
                 look-controls="pointerLockEnabled: true"
@@ -322,17 +390,17 @@
                 </a-cursor>
             </a-camera>
 
-            <!-- Controles VR -->
+            <!-- Solo manos para interacción - sin controladores -->
             <a-entity 
                 id="leftHand"
-                hand-controls="hand: left"
-                laser-controls="hand: left">
+                hand-tracking-controls="hand: left; modelStyle: highPoly"
+                raycaster="objects: .interactive-object; lineColor: red; lineOpacity: 0.5">
             </a-entity>
 
             <a-entity 
                 id="rightHand"
-                hand-controls="hand: right"
-                laser-controls="hand: right">
+                hand-tracking-controls="hand: right; modelStyle: highPoly"
+                raycaster="objects: .interactive-object; lineColor: blue; lineOpacity: 0.5">
             </a-entity>
         </a-entity>
     </a-scene>
